@@ -29,6 +29,10 @@ public class Registro extends javax.swing.JFrame {
     public Registro() {
         initComponents();
         rellenoBotones();
+        
+       /* ImageIcon ImageIcon = new ImageIcon("/iconos/reparacion.png");
+        Image Image = ImageIcon.getImage();
+        this.setIconImage(Image);*/
     }
 
     /**

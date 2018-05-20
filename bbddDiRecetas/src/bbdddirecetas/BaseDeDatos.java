@@ -106,16 +106,26 @@ public class BaseDeDatos {
             System.out.println("Ya tenemos cuenta bancaria");
             String motor = "CREATE TABLE MOTOR("
                     + "P_Motor INT(8) PRIMARY KEY AUTO_INCREMENT,\n"
-                    + "A_Modelo INT(8),\n"
                     + "Codigo VARCHAR(20),\n"
-                    + "Combustible VARCHAR(10),\n"
-                    + "FOREIGN KEY(A_Modelo)\n"
-                    + "REFERENCES MODELO (P_Modelo)\n"
-                    + "ON DELETE CASCADE \n"
-                    + "ON UPDATE CASCADE\n"
+                    + "Combustible VARCHAR(10)\n"
                     + ")ENGINE=InnoDB";
             st.executeUpdate(motor);
             System.out.println("motor creado");
+            String ModeloMotor = "CREATE TABLE ModeloMotor("
+                    + "P_MM INT(8) PRIMARY KEY AUTO_INCREMENT,\n"
+                    + "A_Modelo INT(8),\n"
+                    + "A_Motor INT(8),\n"
+                    + "FOREIGN KEY(A_Modelo)\n"
+                    + "REFERENCES MODELO (P_Modelo)\n"
+                    + "ON DELETE CASCADE \n"
+                    + "ON UPDATE CASCADE,\n"
+                    + "FOREIGN KEY(A_Motor)\n"
+                    + "REFERENCES MOTOR (P_Motor)\n"
+                    + "ON DELETE CASCADE \n"
+                    + "ON UPDATE CASCADE\n"
+                    + ")ENGINE=InnoDB";
+            st.executeUpdate(ModeloMotor);
+            System.out.println("MM creado");
             String recambio = "CREATE TABLE RECAMBIO(\n"
                     + "P_Recambio INT(8) PRIMARY KEY AUTO_INCREMENT,\n"
                     + "A_Motor INT(8),\n"
@@ -167,14 +177,40 @@ public class BaseDeDatos {
             String factura = "CREATE TABLE FACTURA("
                     + "P_Factura INT(8) PRIMARY KEY AUTO_INCREMENT,\n"
                     + "Fecha VARCHAR(10),\n"
-                    + "A_Carre INT(8),\n"
-                    + "FOREIGN KEY(A_Carre)\n"
-                    + "REFERENCES CAR_RE (P_Carre)\n"
+                    + "A_Carrito INT(8),"
+                    + "A_Desguace INT(8),\n"
+                    + "FOREIGN KEY(A_Carrito)\n"
+                    + "REFERENCES CARRITO (P_Carrito)\n"
+                    + "ON DELETE CASCADE \n"
+                    + "ON UPDATE CASCADE,\n"
+                    + "FOREIGN KEY(A_Desguace)\n"
+                    + "REFERENCES DESGUACE (P_DESGUACE)\n"
                     + "ON DELETE CASCADE \n"
                     + "ON UPDATE CASCADE\n"
                     + ")ENGINE=InnoDB";
             st.executeUpdate(factura);
             System.out.println("Factura creado");
+            /*SELECT
+     car_re.`Cantidad` AS car_re_Cantidad,
+     factura.`Fecha` AS factura_Fecha,
+     usuario.`Nombre` AS usuario_Nombre,
+     usuario.`Direccion` AS usuario_Direccion,
+     usuario.`CorreoElectronico` AS usuario_CorreoElectronico,
+     usuario.`Apellidos` AS usuario_Apellidos,
+     recambio.`Precio` AS recambio_Precio,
+     pieza.`Nombre` AS pieza_Nombre,
+     modelo.`Nombre` AS modelo_Nombre,
+     marca.`Nombre` AS marca_Nombre
+FROM
+     `carrito` carrito INNER JOIN `car_re` car_re ON carrito.`P_Carrito` = car_re.`A_Carrito`
+     INNER JOIN `factura` factura ON car_re.`P_Carre` = factura.`A_Carre`
+     INNER JOIN `recambio` recambio ON car_re.`A_Recambio` = recambio.`P_Recambio`
+     INNER JOIN `pieza` pieza ON recambio.`A_Pieza` = pieza.`P_Pieza`
+     INNER JOIN `motor` motor ON recambio.`A_Motor` = motor.`P_Motor`
+     INNER JOIN `modelomotor` modelomotor ON motor.`P_Motor` = modelomotor.`A_Motor`
+     INNER JOIN `modelo` modelo ON modelomotor.`A_Modelo` = modelo.`P_Modelo`
+     INNER JOIN `marca` marca ON modelo.`A_Marca` = marca.`P_Marca`
+     INNER JOIN `usuario` usuario ON carrito.`A_Usuario` = usuario.`P_Usuario`*/
 
             /*Introduccion de datos*/
             //Marcas
@@ -601,13 +637,21 @@ public class BaseDeDatos {
             //Esto de a continuacion ser ira creando con el uso , solo son ejemplos actualmente
             /*Desguaces*/
             Introducir("DESGUACE", "null,'','','',''");
-            Introducir("DESGUACE", "null,'Desguace1','Calle Inventada 7','942558789','123456789C'");
+            Introducir("DESGUACE", "null,'Desguace Becerril','Calle Inventada 7','942558789','123456789C'");
             /*Usuarios*/
             Introducir("USUARIO", "null,null, 'Adrian' , 'adr1997' , '1234','San camilo 8','666123456','adrian@gmail.com','74859613A','Iriondo Gonzalez' ");
             Introducir("USUARIO", "null,2, 'Rigoberto' , 'r' , '1','SanTiburcio 16','942568794','rigoberto@gmail.com','45698712K' ,'Di Sousa'");
             /*Cuenta bancaria*/
             Introducir("CuentaBancaria", "null,1,'ES12 1234 1324 1234 2015'");
             Introducir("CuentaBancaria", "null,2,'ES15 1234 1324 1234 2016'");
+            Introducir("Motor", "null , '2JC','Gasolina'");
+            Introducir("ModeloMotor", "null , 1, 1");
+            Introducir("Carrito", "null, 1");
+            Introducir("Recambio", "null, 1,1,2,19,50");
+            Introducir("Recambio", "null, 1,14,2,25,15");
+            Introducir("Car_re", "null , 1 ,1 ,5");
+            Introducir("Car_re", "null , 1 ,2 ,1");
+            Introducir("Factura", "null ,'20/05/2018',1,2");
             /*Recambio*/
             //("RECAMBIO", "null, 148,108,1,17");
             /*Carrito*/

@@ -35,6 +35,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
     int seleccion = 0;
     static String nB;
     Elegir e;
+    NModificar nm;
 
     // seleccion = table.getSelectedRow();
     /*
@@ -84,6 +85,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
         btnAñadir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -216,7 +218,18 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 89, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,24 +240,25 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(119, 119, 119)))
+                .addGap(120, 120, 120)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(225, 225, 225))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -366,46 +380,77 @@ public class PrincipalGestion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        
-        setAccion("Añadir");
-        if (valor == "Pieza") {
-            setTipo(valor);
-        }
-        if (valor == "Marca") {
-            setTipo(valor);
-        }
-        if (valor == "Recambio") {
-            setTipo(valor);
-        }
         try {
-            e = new Elegir(this, true);
+            setAccion("Añadir");
+            if (valor == "Pieza") {
+                setTipo(valor);
+                e = new Elegir(this, true);
+                e.setVisible(true);
+            }
+            if (valor == "Marca") {
+                setTipo(valor);
+                e = new Elegir(this, true);
+                e.setVisible(true);
+            }
+            if (valor == "Recambio") {
+                setTipo(valor);
+                nRecambio nr;
+                nr = new nRecambio(this, true);
+                nr.setVisible(true);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        e.setVisible(true);
+
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        
+
     }//GEN-LAST:event_tableMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         setAccion("Modificar");
-        if (valor == "Pieza") {
-            setTipo(valor);
-        }
-        if (valor == "Marca") {
-            setTipo(valor);
-        }
-        if (valor == "Recambio") {
-            setTipo(valor);
-        }
+
+        int p = 0;
+
         try {
-            e = new Elegir(this, true);
+            Statement s = conexion.createStatement();
+            if (valor == "Pieza") {
+                setTipo("pieza");
+                int row = table.getSelectedRow();
+                Object end = modelo.getValueAt(row, 0);
+                setNombre(end.toString());
+                nm = new NModificar(this, "Modificar", true);
+                nm.setVisible(true);
+            }
+            if (valor == "Marca") {
+                setTipo("modelo");
+                int row = table.getSelectedRow();
+                Object end = modelo.getValueAt(row, 1);
+                Object salida = modelo.getValueAt(row, 2);
+                System.out.println(end.toString());
+                //setNombre(end.toString());
+                ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
+                        + "                    FROM modelo p "
+                        + "                    WHERE p.Nombre = '" + end.toString() + "'"
+                        + "                    AND p.AnoSalida = '" + salida.toString() + "'");
+                while (resultRell.next()) {
+                    p = resultRell.getInt(1);
+                }
+                setNombre(p + "");
+                nm = new NModificar(this, "Modificar", true);
+                nm.setVisible(true);
+            }
+            if (valor == "Recambio") {
+                setTipo(valor);
+            }
+
+            //e = new Elegir(this, true);
         } catch (SQLException ex) {
             Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        e.setVisible(true);
+        //e.setVisible(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -472,6 +517,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -592,16 +638,16 @@ public class PrincipalGestion extends javax.swing.JFrame {
             }
         } else {
             if (n == "Marca") {
-                Object nuevaFila[] = {"Marca ", "Modelo"};
+                Object nuevaFila[] = {"Marca ", "Modelo", "Año de salida", "Año de fin"};
                 modelo.setColumnIdentifiers(nuevaFila);
-                ResultSet rs = s.executeQuery("SELECT  ma.Nombre , mo.Nombre "
+                ResultSet rs = s.executeQuery("SELECT  ma.Nombre , mo.Nombre , mo.AnoSalida , mo.AnoExtincion"
                         + "                    FROM marca ma , modelo mo "
                         + "                     WHERE ma.P_Marca = mo.A_Marca");
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[2];
-                    for (int i = 0; i < 2; i++) {
+                    Object[] fila = new Object[4];
+                    for (int i = 0; i < 4; i++) {
                         fila[i] = rs.getObject(i + 1);
                         //System.out.println("file: " + fila[i]);
                     }
@@ -609,16 +655,17 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 }
             }
             if (n == "Recambio") {
-                Object nuevaFila[] = {"Recambio", "Marca", "Modelo", "Desguace", "Cantidad disponible"};
+                Object nuevaFila[] = {"Recambio", "Marca", "Modelo", "Desguace", "Cantidad disponible", "Precio"};
                 modelo.setColumnIdentifiers(nuevaFila);
 
-                ResultSet rs = s.executeQuery("SELECT r.* \n"
-                        + "FROM recambio r, pieza p, modelo mo , marca ma, desguace d, motor m\n"
+                ResultSet rs = s.executeQuery("SELECT  p.`Nombre`, ma.`Nombre` , mo.Nombre , d.Nombre,  r.CantidadDisponible , r.precio\n"
+                        + "FROM recambio r, pieza p, modelo mo , marca ma, desguace d, motor m, modelomotor mm\n"
                         + "WHERE r.`A_Motor`=m.`P_Motor`\n"
                         + "AND r.`A_Pieza`=p.`P_Pieza`\n"
                         + "AND r.`A_Desguace`=d.`P_Desguace`\n"
-                        + "AND m.`A_Modelo`=mo.`P_Modelo`\n"
-                        + "AND mo.`A_Marca`=ma.`P_Marca`");
+                        + "AND m.`P_Motor`=mm.`A_Motor` \n"
+                        + "AND mo.`P_Modelo` = mm.`A_Modelo`\n"
+                        + "AND mo.`A_Marca`=ma.`P_Marca`   ");
                 System.out.println(rs);
                 while (rs.next()) {
                     Object[] fila = new Object[5];

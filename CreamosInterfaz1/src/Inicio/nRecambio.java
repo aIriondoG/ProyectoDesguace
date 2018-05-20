@@ -5,6 +5,14 @@
  */
 package Inicio;
 
+import Conexion.ConexionBD;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Rubén
@@ -14,9 +22,13 @@ public class nRecambio extends javax.swing.JDialog {
     /**
      * Creates new form nRecambio
      */
+    Connection conexion = ConexionBD.conexion();
+    Statement s;
+
     public nRecambio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        rellenoJC();
     }
 
     /**
@@ -41,10 +53,12 @@ public class nRecambio extends javax.swing.JDialog {
         cbTipo = new javax.swing.JComboBox<>();
         cbDesguace = new javax.swing.JComboBox<>();
         txtCantidad = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cbMotor = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAñadir = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,15 +74,25 @@ public class nRecambio extends javax.swing.JDialog {
 
         jLabel6.setText("Cantidad");
 
-        cbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMarcaActionPerformed(evt);
+            }
+        });
 
-        cbModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
 
-        cbPieza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel7.setText("Motor");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbDesguace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMotorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,8 +100,8 @@ public class nRecambio extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -86,10 +110,10 @@ public class nRecambio extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(9, 9, 9)))
-                        .addGap(43, 43, 43)
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbPieza, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbDesguace, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbPieza, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCantidad))
                         .addGap(3, 3, 3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -102,13 +126,17 @@ public class nRecambio extends javax.swing.JDialog {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(61, 61, 61))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                                .addGap(97, 97, 97)))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                .addGap(97, 97, 97))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(63, 63, 63)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbMotor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 122, Short.MAX_VALUE)
+                                    .addComponent(cbTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 121, Short.MAX_VALUE)
                                     .addComponent(cbModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(3, 3, 3)))))
                 .addContainerGap())
@@ -124,6 +152,10 @@ public class nRecambio extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,16 +175,21 @@ public class nRecambio extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Añadir Recambio");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAñadir.setText("Añadir Recambio");
+        btnAñadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAñadirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Vender Recambio");
+        btnModificar.setText("Modificar Recambio");
 
-        jButton3.setText("Comprar Recambio");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,21 +198,20 @@ public class nRecambio extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAñadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnAñadir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,19 +230,123 @@ public class nRecambio extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(139, 139, 139))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAñadirActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaActionPerformed
+        // TODO add your handling code here:
+        try {
+            s = conexion.createStatement();
+            cbModelo.removeAllItems();
+            int numModelo = 0;
+            int i = 0;
+            ResultSet rs = s.executeQuery("SELECT m.Nombre "
+                    + "FROM modelo m , marca ma "
+                    + "WHERE m.A_Marca= ma.P_Marca "
+                    + "AND ma.Nombre ='" + cbMarca.getSelectedItem().toString() + "'");
+            while (rs.next()) {
+                numModelo++;
+            }
+            String[] modelos = new String[numModelo];
+            ResultSet rs2 = s.executeQuery("SELECT m.Nombre "
+                    + "FROM modelo m , marca ma "
+                    + "WHERE m.A_Marca= ma.P_Marca "
+                    + "AND ma.Nombre ='" + cbMarca.getSelectedItem().toString() + "'");
+            while (rs2.next()) {
+                modelos[i] = rs2.getString(1);
+                i++;
+            }
+            for (int j = 0; j < modelos.length; j++) {
+                //System.out.println(marcas[j]);
+                cbMarca.addItem(modelos[j]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(nRecambio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbMarcaActionPerformed
+
+    private void cbMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMotorActionPerformed
+        // TODO add your handling code here:
+        try {
+            s = conexion.createStatement();
+            cbMotor.removeAllItems();
+            int numMotor = 0;
+            int i = 0;
+            ResultSet rs = s.executeQuery("SELECT mo.Codigo "
+                    + "FROM modelo m , motor mo , modelomotor mm "
+                    + "WHERE mo.P_Motor= mm.A_Motor "
+                    + "AND mm.A_Modelo = m.P_Modelo "
+                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'");
+            while (rs.next()) {
+                numMotor++;
+            }
+            String[] motores = new String[numMotor];
+            ResultSet rs2 = s.executeQuery("SELECT mo.Codigo "
+                    + "FROM modelo m , motor mo , modelomotor mm "
+                    + "WHERE mo.P_Motor= mm.A_Motor "
+                    + "AND mm.A_Modelo = m.P_Modelo "
+                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'");
+            while (rs2.next()) {
+                motores[i] = rs2.getString(1);
+                i++;
+            }
+            for (int j = 0; j < motores.length; j++) {
+                //System.out.println(marcas[j]);
+                cbMotor.addItem(motores[j]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(nRecambio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbMotorActionPerformed
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+        try {
+            s = conexion.createStatement();
+            cbMotor.removeAllItems();
+            int numPieza = 0;
+            int i = 0;
+            ResultSet rs = s.executeQuery("SELECT p.`Nombre`\n"
+                    + "    FROM tipo t, pieza p\n"
+                    + "    WHERE p.`A_Tipo`=t.`P_Tipo`\n"
+                    + "    AND t.`Nombre` = '"+cbTipo.getSelectedItem().toString()+"'");
+            while (rs.next()) {
+                numPieza++;
+            }
+            String[] piezas = new String[numPieza];
+            ResultSet rs2 = s.executeQuery("SELECT p.`Nombre`\n"
+                    + "    FROM tipo t, pieza p\n"
+                    + "    WHERE p.`A_Tipo`=t.`P_Tipo`\n"
+                    + "    AND t.`Nombre` = '"+cbTipo.getSelectedItem().toString()+"'");
+            while (rs2.next()) {
+                piezas[i] = rs2.getString(1);
+                i++;
+            }
+            for (int j = 0; j < piezas.length; j++) {
+                //System.out.println(marcas[j]);
+                cbMotor.addItem(piezas[j]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(nRecambio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,22 +391,90 @@ public class nRecambio extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAñadir;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cbDesguace;
     private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
+    private javax.swing.JComboBox<String> cbMotor;
     private javax.swing.JComboBox<String> cbPieza;
     private javax.swing.JComboBox<String> cbTipo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
+    public void rellenoJC() {
+        try {
+            s = conexion.createStatement();
+            //Marcas
+            int numMarca = 0;
+            int i = 0;
+            ResultSet rs = s.executeQuery("SELECT m.Nombre "
+                    + "FROM marca m");
+            while (rs.next()) {
+                numMarca++;
+            }
+            String[] marcas = new String[numMarca];
+            ResultSet rs2 = s.executeQuery("SELECT m.Nombre "
+                    + "FROM marca m");
+            while (rs2.next()) {
+                marcas[i] = rs2.getString(1);
+                i++;
+            }
+            for (int j = 0; j < marcas.length; j++) {
+                //System.out.println(marcas[j]);
+                cbMarca.addItem(marcas[j]);
+            }
+            //Tipos
+            int numTipo = 0;
+            i = 0;
+            ResultSet rs3 = s.executeQuery("SELECT t.Nombre "
+                    + "FROM tipo t");
+            while (rs3.next()) {
+                numTipo++;
+            }
+            String[] tipos = new String[numTipo];
+            ResultSet rs4 = s.executeQuery("SELECT t.Nombre "
+                    + "FROM tipo t");
+            while (rs4.next()) {
+                tipos[i] = rs4.getString(1);
+                i++;
+            }
+            for (int j = 0; j < tipos.length; j++) {
+                //System.out.println(marcas[j]);
+                cbTipo.addItem(tipos[j]);
+            }
+            //Desguaces
+            int numDesguace = 0;
+            i = 0;
+            ResultSet rs5 = s.executeQuery("SELECT d.Nombre "
+                    + "FROM desguace d");
+            while (rs5.next()) {
+                numDesguace++;
+            }
+            String[] desguaces = new String[numDesguace];
+            ResultSet rs6 = s.executeQuery("SELECT t.Nombre "
+                    + "FROM tipo t");
+            while (rs6.next()) {
+                desguaces[i] = rs6.getString(1);
+                i++;
+            }
+            for (int j = 0; j < desguaces.length; j++) {
+                //System.out.println(marcas[j]);
+                cbTipo.addItem(desguaces[j]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(nRecambio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

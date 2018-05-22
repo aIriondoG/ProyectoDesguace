@@ -9,6 +9,7 @@ import Conexion.ConexionBD;
 import Inicio.OpcionesEmpresa;
 import Inicio.PrincipalUsuario;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,17 +23,16 @@ import javax.swing.ImageIcon;
  * @author Rubén
  */
 public class Registro extends javax.swing.JFrame {
-
+    static String username;
     Connection conexion = ConexionBD.conexion();
     boolean empresa = false;
 
     public Registro() {
         initComponents();
         rellenoBotones();
-        
-       /* ImageIcon ImageIcon = new ImageIcon("/iconos/reparacion.png");
-        Image Image = ImageIcon.getImage();
-        this.setIconImage(Image);*/
+        Image rIcon = Toolkit.getDefaultToolkit().getImage("iconos/reparacion.png");
+        this.setIconImage(rIcon);
+
     }
 
     /**
@@ -230,6 +230,7 @@ public class Registro extends javax.swing.JFrame {
                 }
             }
             if (verdadero2 == true) {
+                setUsuario(txtUsuario.getText());
                 txtError.setText("Registro Satisfactorio. ");
                 entrar();
                 //this.setVisible(false);
@@ -303,6 +304,14 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtError;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+    public static void setUsuario(String us){
+        Registro.username = us;
+    }
+    public static String getUsername(){
+         return Registro.username;
+    }
+    
+    
     public void entrar() throws SQLException {
         if (empresa == true) {
             OpcionesEmpresa oe = null;

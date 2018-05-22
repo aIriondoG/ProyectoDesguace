@@ -35,7 +35,7 @@ public class PiezaUsuario extends javax.swing.JFrame {
 
     public PiezaUsuario() throws SQLException {
         initComponents();
-
+        
         modelo = (DefaultTableModel) tabla.getModel();
         Object nuevaFila[] = {"Tipo", "Pieza"};
         modelo.setColumnIdentifiers(nuevaFila);

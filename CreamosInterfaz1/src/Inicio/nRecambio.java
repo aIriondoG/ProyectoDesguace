@@ -272,7 +272,7 @@ public class nRecambio extends javax.swing.JDialog {
             }
             for (int j = 0; j < modelos.length; j++) {
                 //System.out.println(marcas[j]);
-                cbMarca.addItem(modelos[j]);
+                cbModelo.addItem(modelos[j]);
             }
 
         } catch (SQLException ex) {
@@ -291,7 +291,7 @@ public class nRecambio extends javax.swing.JDialog {
                     + "FROM modelo m , motor mo , modelomotor mm "
                     + "WHERE mo.P_Motor= mm.A_Motor "
                     + "AND mm.A_Modelo = m.P_Modelo "
-                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'");
+                    + "AND m.Nombre ='"+ cbModelo.getSelectedItem().toString() +"'");
             while (rs.next()) {
                 numMotor++;
             }
@@ -340,7 +340,7 @@ public class nRecambio extends javax.swing.JDialog {
             }
             for (int j = 0; j < piezas.length; j++) {
                 //System.out.println(marcas[j]);
-                cbMotor.addItem(piezas[j]);
+                cbPieza.addItem(piezas[j]);
             }
 
         } catch (SQLException ex) {
@@ -461,15 +461,15 @@ public class nRecambio extends javax.swing.JDialog {
                 numDesguace++;
             }
             String[] desguaces = new String[numDesguace];
-            ResultSet rs6 = s.executeQuery("SELECT t.Nombre "
-                    + "FROM tipo t");
+            ResultSet rs6 = s.executeQuery("SELECT d.Nombre "
+                    + "FROM desguace d");
             while (rs6.next()) {
                 desguaces[i] = rs6.getString(1);
                 i++;
             }
             for (int j = 0; j < desguaces.length; j++) {
                 //System.out.println(marcas[j]);
-                cbTipo.addItem(desguaces[j]);
+                cbDesguace.addItem(desguaces[j]);
             }
 
         } catch (SQLException ex) {

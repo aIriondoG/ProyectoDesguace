@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -25,13 +26,13 @@ public class NModificar extends javax.swing.JDialog {
      * Creates new form NModificar
      */
     Connection conexion = ConexionBD.conexion();
-    PrincipalGestion pg = null;
+    PrincipalGestion pga = null;
     Statement s = conexion.createStatement();
     int fila = 0;
 
     public NModificar(java.awt.Frame parent, String titulo, boolean modal) throws SQLException {
         super(parent, titulo, modal);
-        pg = new PrincipalGestion();
+        parent.dispose();
         initComponents();
         visualizar();
         if (titulo == "Añadir") {
@@ -437,7 +438,7 @@ public class NModificar extends javax.swing.JDialog {
         try {
             // TODO add your handling code here:
             //Statement s = conexion.createStatement();
-            
+
             int A_Tipo = 0;
 
             ResultSet rs = s.executeQuery("SELECT  ma.P_Tipo "
@@ -451,7 +452,8 @@ public class NModificar extends javax.swing.JDialog {
                 System.out.println(insertinto);
                 s.executeUpdate(insertinto);
             }
-
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -478,6 +480,8 @@ public class NModificar extends javax.swing.JDialog {
                 System.out.println(insertinto);
                 s.executeUpdate(insertinto);
             }
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
 
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
@@ -492,6 +496,8 @@ public class NModificar extends javax.swing.JDialog {
             String insertinto = "INSERT INTO tipo VALUES(null ,'" + txtPNombre.getText() + "'  );";
             System.out.println(insertinto);
             s.executeUpdate(insertinto);
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -510,13 +516,18 @@ public class NModificar extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            pga = new PrincipalGestion();
+        } catch (SQLException ex) {
+            Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pga.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMaIntroActionPerformed
 
     private void btnPModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPModificarActionPerformed
         // TODO add your handling code here:
         try {
-
 
             String sentencias = "Nombre='" + txtNombre.getText() + "' , A_Tipo=" + cbTipo.getSelectedIndex();
             System.out.println(sentencias);
@@ -533,15 +544,30 @@ public class NModificar extends javax.swing.JDialog {
     private void btnMoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoModificarActionPerformed
         // TODO add your handling code here:
         try {
-            String sentencias = "Nombre='" + txtPNombre.getText() + "', A_Marca=" + cbMarca.getSelectedIndex() + " , AnoSalida='" + txtAS.getText() + "' , AnoExtincion='" + txtAR.getText() + "'";
+            //Statement s = conexion.createStatement();
+            int mar = 0;
+            ResultSet rs = s.executeQuery("SELECT  m.P_Marca\n"
+                    + "FROM marca m\n"
+                    + "WHERE m.Nombre = '"+cbMarca.getSelectedItem().toString()+"'\n"
+            
+            );
+
+            while (rs.next()) {
+                mar = rs.getInt(1);
+            }
+            System.out.println("mar");
+            String sentencias = "Nombre='" + txtMName.getText() + "', A_Marca=" + mar + " , AnoSalida='" + txtAS.getText() + "' , AnoExtincion='" + txtAR.getText() + "'";
             System.out.println(sentencias);
             String modificar = "UPDATE modelo SET " + sentencias + " WHERE P_Modelo=" + this.getFila() + "";
             s.executeUpdate(modificar);
             s.close();
+             this.dispose();
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
+       
 
     }//GEN-LAST:event_btnMoModificarActionPerformed
 
@@ -553,6 +579,8 @@ public class NModificar extends javax.swing.JDialog {
             String modificar = "UPDATE tipo SET " + sentencias + " WHERE P_Tipo=" + this.getFila() + "";
             s.executeUpdate(modificar);
             s.close();
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -567,6 +595,8 @@ public class NModificar extends javax.swing.JDialog {
             String modificar = "UPDATE marca SET " + sentencias + " WHERE P_Marca=" + this.getFila() + "";
             s.executeUpdate(modificar);
             s.close();
+            pga = new PrincipalGestion();
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -574,7 +604,13 @@ public class NModificar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMaModificarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            pga = new PrincipalGestion();
+        } catch (SQLException ex) {
+            Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pga.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -680,7 +716,7 @@ public class NModificar extends javax.swing.JDialog {
         int num = 0;
         Statement s = conexion.createStatement();
 
-        if (pg.getTipo() == "pieza") {
+        if (pga.getTipo() == "pieza") {
             //System.out.println("Relleno pieza");
             int p_p = 0;
             String nombre = null;
@@ -689,7 +725,7 @@ public class NModificar extends javax.swing.JDialog {
 
             ResultSet resultRell = s.executeQuery("SELECT * "
                     + "                    FROM pieza p "
-                    + "                    WHERE p.Nombre = '" + pg.getNombre() + "'");
+                    + "                    WHERE p.Nombre = '" + pga.getNombre() + "'");
             while (resultRell.next()) {
                 //p_p = resultRell.getInt(1);
                 nombre = resultRell.getString(2);
@@ -721,13 +757,13 @@ public class NModificar extends javax.swing.JDialog {
             setFila(p_p);
             cbTipo.setSelectedIndex(a_tipo - 1);
         }
-        if (pg.getTipo() == "marca") {
+        if (pga.getTipo() == "marca") {
             int pm = 0;
             String nombre = null;
             String pais = null;
             ResultSet resultRell = s.executeQuery("SELECT * "
                     + "                    FROM marca m "
-                    + "                    WHERE m.Nombre = '" + pg.getNombre() + "'");
+                    + "                    WHERE m.Nombre = '" + pga.getNombre() + "'");
             while (resultRell.next()) {
                 pm = resultRell.getInt(1);
                 nombre = resultRell.getString(2);
@@ -737,7 +773,7 @@ public class NModificar extends javax.swing.JDialog {
             txtPais.setText(pais);
             setFila(pm);
         }
-        if (pg.getTipo() == "modelo") {
+        if (pga.getTipo() == "modelo") {
             System.out.println("Relleno modelo");
             int pM = 0;
             String nombre = null;
@@ -747,7 +783,7 @@ public class NModificar extends javax.swing.JDialog {
 
             ResultSet resultRell = s.executeQuery("SELECT * "
                     + "                    FROM modelo p "
-                    + "                    WHERE p.P_Modelo = "+ pg.getNombre() +"");
+                    + "                    WHERE p.P_Modelo = " + pga.getNombre() + "");
             while (resultRell.next()) {
                 pM = resultRell.getInt(1);
                 nombre = resultRell.getString(2);
@@ -781,13 +817,13 @@ public class NModificar extends javax.swing.JDialog {
             txtAR.setText(anoExtincion);
             cbMarca.setSelectedIndex(aMarca - 1);
         }
-        if (pg.getTipo() == "tipo") {
+        if (pga.getTipo() == "tipo") {
             int pt = 0;
             String nombre = "";
-            System.out.println("pgNombre= " + pg.getNombre());
+            System.out.println("pgNombre= " + pga.getNombre());
             ResultSet ese = s.executeQuery("SELECT * "
                     + "                    FROM tipo t "
-                    + "                    WHERE t.Nombre = '" + pg.getNombre() + "'");
+                    + "                    WHERE t.Nombre = '" + pga.getNombre() + "'");
             while (ese.next()) {
                 System.out.println("1Resultado");
                 pt = ese.getInt(1);
@@ -801,25 +837,25 @@ public class NModificar extends javax.swing.JDialog {
     }
 
     public void visualizar() {
-        if (pg.getTipo() == "pieza") {
+        if (pga.getTipo() == "pieza") {
             pnlPieza.setVisible(true);
             pnlTipos.setVisible(false);
             pnlModelo.setVisible(false);
             pnlMarca.setVisible(false);
         }
-        if (pg.getTipo() == "marca") {
+        if (pga.getTipo() == "marca") {
             pnlPieza.setVisible(false);
             pnlTipos.setVisible(false);
             pnlModelo.setVisible(false);
             pnlMarca.setVisible(true);
         }
-        if (pg.getTipo() == "modelo") {
+        if (pga.getTipo() == "modelo") {
             pnlPieza.setVisible(false);
             pnlTipos.setVisible(false);
             pnlModelo.setVisible(true);
             pnlMarca.setVisible(false);
         }
-        if (pg.getTipo() == "tipo") {
+        if (pga.getTipo() == "tipo") {
             pnlPieza.setVisible(false);
             pnlTipos.setVisible(true);
             pnlModelo.setVisible(false);

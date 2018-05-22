@@ -29,20 +29,21 @@ public class PrincipalUsuario extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Connection conexion = ConexionBD.conexion();
     static String coche;
+    static String mod;
     PiezaUsuario pu;
-    
+
     public PrincipalUsuario() throws SQLException {
         initComponents();
         modelo = (DefaultTableModel) tabla.getModel();
         rellenoTabla();
         rellenoMarcas();
-        
+
         ImageIcon buscar = new ImageIcon("iconos/buscar.png");
         ImageIcon buscarDef = new ImageIcon(buscar.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-        
+
         btnBuscar.setIcon(buscarDef);
         jPanel4.setVisible(false);
-        
+
     }
 
     /**
@@ -280,20 +281,20 @@ public class PrincipalUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             System.out.println(modelo.getRowCount());
-            
+
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 modelo.removeRow(i);
                 i -= 1;
-                
+
             }
-            
+
             Statement s = conexion.createStatement();
             System.out.println(cbModelo.getSelectedItem().toString());
             ResultSet rs = s.executeQuery("SELECT  ma.Nombre ,mo.Nombre , mo.AnoSalida , mo.AnoExtincion "
                     + "                    FROM modelo mo , marca ma "
                     + "                    WHERE mo.A_Marca=ma.P_Marca "
                     + "                    AND mo.Nombre LIKE '%" + cbModelo.getSelectedItem().toString() + "%'");
-            
+
             while (rs.next()) {
                 Object[] fila = new Object[4];
                 for (int i = 0; i < 4; i++) {
@@ -325,13 +326,14 @@ public class PrincipalUsuario extends javax.swing.JFrame {
         Object anoS = modelo.getValueAt(row, 2);
         Object anoE = modelo.getValueAt(row, 3);
         car = nombreMa.toString() + " " + nombreMo.toString() + " (" + anoS.toString() + "-" + anoE.toString() + ")";
+        setModelo(nombreMo.toString());
         setCoche(car);
         lblModelo.setText(car);
-       
+
         ImageIcon next = new ImageIcon("iconos/next.png");
         ImageIcon nextDef = new ImageIcon(next.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
         btnNext.setIcon(nextDef);
-        
+
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -384,13 +386,13 @@ public class PrincipalUsuario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public final void rellenoTabla() throws SQLException {
         Statement s = conexion.createStatement();
         ResultSet rs = s.executeQuery("SELECT  ma.Nombre ,mo.Nombre, mo.AnoSalida, mo.AnoExtincion "
                 + "                    FROM modelo mo , marca ma "
                 + "                    WHERE mo.A_Marca=ma.P_Marca");
-        
+
         while (rs.next()) {
             Object[] fila = new Object[4];
             for (int i = 0; i < 4; i++) {
@@ -399,7 +401,7 @@ public class PrincipalUsuario extends javax.swing.JFrame {
             modelo.addRow(fila);
         }
     }
-    
+
     public final void rellenoMarcas() throws SQLException {
         int i = 0;
         int num = 0;
@@ -412,27 +414,35 @@ public class PrincipalUsuario extends javax.swing.JFrame {
         ResultSet query = s.executeQuery("SELECT  ma.Nombre "
                 + "                    FROM  marca ma ");
         String[] marcas = new String[num];
-        
+
         while (query.next()) {
             //System.out.println(" " + query.getString(1));
             marcas[i] = query.getString(1);
             i++;
-            
+
         }
         for (int j = 0; j < marcas.length; j++) {
             //System.out.println(marcas[j]);
             cbMarca.addItem(marcas[j]);
         }
     }
-    
+
+    public static void setModelo(String mod) {
+        PrincipalUsuario.mod = mod;
+    }
+
+    public static String getModelo() {
+        return PrincipalUsuario.mod;
+    }
+
     public static void setCoche(String car) {
         PrincipalUsuario.coche = car;
     }
-    
+
     public static String getCoche() {
         return PrincipalUsuario.coche;
     }
-    
+
     public final void rellenoModelos() throws SQLException {
         cbModelo.removeAllItems();
         int i = 0;
@@ -450,22 +460,17 @@ public class PrincipalUsuario extends javax.swing.JFrame {
                 + "WHERE m.A_Marca = ma.P_Marca\n"
                 + "AND ma.Nombre = '" + cbMarca.getSelectedItem().toString() + "'");
         String[] modelos = new String[num];
-        
+
         while (query.next()) {
             //System.out.println(" " + query.getString(1));
             modelos[i] = query.getString(1);
             i++;
-            
+
         }
         for (int j = 0; j < modelos.length; j++) {
             //System.out.println(marcas[j]);
             cbModelo.addItem(modelos[j]);
         }
-    }
-    
-    public static void setModeloAño(String mo, int ano) {
-        mo = mo;
-        ano = ano;
     }
 
 

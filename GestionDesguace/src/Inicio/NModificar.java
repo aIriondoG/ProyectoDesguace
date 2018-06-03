@@ -556,7 +556,6 @@ public class NModificar extends javax.swing.JDialog {
             System.out.println(this.getFila());
             String modificar = "UPDATE pieza SET " + sentencias + " WHERE P_Pieza=" + this.getFila() + "";
             s.executeUpdate(modificar);
-            s.close();
             this.dispose();
             pga = new PrincipalGestion();
             pga.setVisible(true);
@@ -602,7 +601,6 @@ public class NModificar extends javax.swing.JDialog {
             System.out.println(sentencias);
             String modificar = "UPDATE tipo SET " + sentencias + " WHERE P_Tipo=" + this.getFila() + "";
             s.executeUpdate(modificar);
-            s.close();
             this.dispose();
             pga = new PrincipalGestion();
             pga.setVisible(true);
@@ -619,7 +617,7 @@ public class NModificar extends javax.swing.JDialog {
             System.out.println(sentencias);
             String modificar = "UPDATE marca SET " + sentencias + " WHERE P_Marca=" + this.getFila() + "";
             s.executeUpdate(modificar);
-            s.close();
+
             this.dispose();
             pga = new PrincipalGestion();
             pga.setVisible(true);

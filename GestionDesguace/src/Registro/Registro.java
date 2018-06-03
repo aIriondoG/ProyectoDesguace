@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
  * @author Rubén
  */
 public class Registro extends javax.swing.JFrame {
+
     static String username;
     Connection conexion = ConexionBD.conexion();
     boolean empresa = false;
@@ -30,6 +31,7 @@ public class Registro extends javax.swing.JFrame {
     public Registro() {
         initComponents();
         rellenoBotones();
+        
         Image rIcon = Toolkit.getDefaultToolkit().getImage("iconos/reparacion.png");
         this.setIconImage(rIcon);
 
@@ -48,9 +50,9 @@ public class Registro extends javax.swing.JFrame {
         txtError = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
-        txtContra = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txtContra = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -61,17 +63,19 @@ public class Registro extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        txtError.setEnabled(false);
+
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
 
-        txtContra.setToolTipText("");
-
         jLabel2.setText("Usuario");
 
         jLabel3.setText("Contraseña");
+
+        txtContra.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,7 +88,7 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(74, 74, 74)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addComponent(txtContra))
                 .addContainerGap())
         );
@@ -95,10 +99,10 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -169,7 +173,7 @@ public class Registro extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,7 +201,8 @@ public class Registro extends javax.swing.JFrame {
         boolean verdadero = false;
         boolean verdadero2 = false;
         usuario = txtUsuario.getText();
-        contrasena = txtContra.getText();
+        contrasena = txtContra.getText().toString();
+        System.out.println(contrasena);
         try {
             Statement sentencia = conexion.createStatement();
             String consultaUsuarios = "SELECT u.Usuario , u.Contrasena , u.A_Desguace "
@@ -268,7 +273,7 @@ public class Registro extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -301,18 +306,18 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtContra;
+    private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtError;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-    public static void setUsuario(String us){
+    public static void setUsuario(String us) {
         Registro.username = us;
     }
-    public static String getUsername(){
-         return Registro.username;
+
+    public static String getUsername() {
+        return Registro.username;
     }
-    
-    
+
     public void entrar() throws SQLException {
         if (empresa == true) {
             OpcionesEmpresa oe = null;

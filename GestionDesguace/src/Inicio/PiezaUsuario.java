@@ -8,6 +8,7 @@ package Inicio;
 import Conexion.ConexionBD;
 import static Inicio.PrincipalUsuario.setCoche;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -382,7 +383,7 @@ public class PiezaUsuario extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PiezaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**

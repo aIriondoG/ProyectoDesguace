@@ -9,6 +9,7 @@ import Conexion.ConexionBD;
 import Registro.Registro;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.Toolkit;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -510,6 +511,13 @@ public class PrincipalGestion extends javax.swing.JFrame {
             }
             if (valor == "Recambio") {
                 setTipo(valor);
+                int row = table.getSelectedRow();
+                row = row + 1;
+                setNombre(row + "");
+                this.dispose();
+                nRecambio rec = new nRecambio(this, true);
+                rec.setVisible(true);
+
             }
 
             //e = new Elegir(this, true);
@@ -534,17 +542,20 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 System.out.println("Marca");
                 int id = 0;
                 Object nombreMo = modelo.getValueAt(row, 1);
-                System.out.println(nombreMo.toString());
+                Object anoMo = modelo.getValueAt(row, 2);
+                System.out.println("Modelo: " + nombreMo.toString());
+                System.out.println("Salida: " + anoMo.toString());
                 ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
                         + "                    FROM modelo p "
                         + "                    WHERE p.Nombre = '" + nombreMo.toString() + "'"
-                        + "                   ");
+                        + "                    AND p.AnoSalida = '" + anoMo.toString() + "'");
                 while (resultRell.next()) {
-                    s.executeUpdate("DELETE FROM modelo WHERE P_Modelo = " + resultRell.getInt(1));
+                    id = resultRell.getInt(1);
                 }
-
+                System.out.println("p:" + id);
+                s.executeUpdate("DELETE FROM modelo WHERE P_Modelo = " + id);
             }
-
+            System.out.println("Intento");
             this.dispose();
             PrincipalGestion reload = new PrincipalGestion();
             reload.setVisible(true);
@@ -597,7 +608,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Registro r =new Registro();
+        Registro r = new Registro();
         r.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -850,9 +861,12 @@ public class PrincipalGestion extends javax.swing.JFrame {
         ImageIcon buscar = new ImageIcon("iconos/buscar.png");
         ImageIcon buscarDef = new ImageIcon(buscar.getImage().getScaledInstance(anchuraIcon, alturaIcon, Image.SCALE_DEFAULT));
 
-        ImageIcon volver = new ImageIcon("iconos/volver.png");
+        ImageIcon volver = new ImageIcon("iconos/logout.png");
         ImageIcon volverDef = new ImageIcon(volver.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
+        Image rIcon = Toolkit.getDefaultToolkit().getImage("iconos/reparacion.png");
+        this.setIconImage(rIcon);
+        
         btnAñadir.setIcon(añadirDef);
         btnModificar.setIcon(modificarDef);
         btnEliminar.setIcon(eliminarDef);

@@ -74,9 +74,11 @@ public class BaseDeDatos {
                     + "P_Desguace INT(8) PRIMARY KEY AUTO_INCREMENT,\n"
                     + "Nombre VARCHAR (50),\n"
                     + "Direccion VARCHAR(50),\n"
+                    + "Contrasenia VARCHAR(50),\n"
                     + "Telefono VARCHAR(50),\n"
                     + "CIF VARCHAR(15)\n"
                     + ")ENGINE=InnoDB";
+        
             st.executeUpdate(desguace);
             System.out.println("Desguace creado");
             String usuarios = "CREATE TABLE USUARIO(\n"
@@ -132,7 +134,7 @@ public class BaseDeDatos {
                     + "A_Pieza INT(8),\n"
                     + "A_Desguace INT(8),\n"
                     + "CantidadDisponible INT(2),\n"
-                    + "Precio FLOAT(4,2),\n"
+                    + "Precio double(5,2),\n"
                     + "FOREIGN KEY(A_Motor)\n"
                     + "REFERENCES MOTOR (P_Motor)\n"
                     + "ON DELETE CASCADE \n"
@@ -212,7 +214,7 @@ FROM
      INNER JOIN `marca` marca ON modelo.`A_Marca` = marca.`P_Marca`
      INNER JOIN `usuario` usuario ON carrito.`A_Usuario` = usuario.`P_Usuario`*/
 
-            /*Introduccion de datos*/
+ /*Introduccion de datos*/
             //Marcas
             Introducir("MARCA", "1,'Audi','Alemania'");
             Introducir("MARCA", "2,'Mercedes','Alemania'");
@@ -636,8 +638,8 @@ FROM
             Introducir("PIEZA", "null,'Muelle nuematico del maletero',11");
             //Esto de a continuacion ser ira creando con el uso , solo son ejemplos actualmente
             /*Desguaces*/
-            Introducir("DESGUACE", "null,'','','',''");
-            Introducir("DESGUACE", "null,'Desguace Becerril','Calle Inventada 7','942558789','123456789C'");
+            Introducir("DESGUACE", "null,'','','','',''");
+            Introducir("DESGUACE", "null,'Desguace Becerril','Calle Inventada 7','1','942558789','123456789C'");
             /*Usuarios*/
             Introducir("USUARIO", "null,null, 'Adrian' , 'adr1997' , '1234','San camilo 8','666123456','adrian@gmail.com','74859613A','Iriondo Gonzalez' ");
             Introducir("USUARIO", "null,2, 'Rigoberto' , 'r' , '1','SanTiburcio 16','942568794','rigoberto@gmail.com','45698712K' ,'Di Sousa'");

@@ -255,10 +255,10 @@ public class NuevoUsuario extends javax.swing.JDialog {
                 Statement s = conexion.createStatement();
                 ResultSet rs = s.executeQuery("SELECT  de.P_Desguace "
                         + "                    FROM  desguace de "
-                        + "                    WHERE de.Nombre = '"+se.getNEmpresa()+"'");
+                        + "                    WHERE de.Nombre = '" + se.getNEmpresa() + "'");
                 while (rs.next()) {
                     num = rs.getInt(1);
-                    empresa = num+"";
+                    empresa = num + "";
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,7 +270,7 @@ public class NuevoUsuario extends javax.swing.JDialog {
             Statement s = conexion.createStatement();
             String insert = "INSERT INTO usuario VALUES"
                     + "(null, "
-                    + ""+empresa + ", "
+                    + "" + empresa + ", "
                     + "'" + nombre + "', "
                     + "'" + usuario + "', "
                     + "'" + contrasena + "', "
@@ -284,6 +284,7 @@ public class NuevoUsuario extends javax.swing.JDialog {
             //Hacer prueba si existe ese usuario
             s.executeUpdate(insert);
             this.dispose();
+            padre.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -297,8 +298,7 @@ public class NuevoUsuario extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Registro r = new Registro();
-        r.setVisible(true);
+        padre.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEActionPerformed

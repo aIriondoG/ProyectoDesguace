@@ -7,6 +7,7 @@ package Inicio;
 
 import Conexion.ConexionBD;
 import static Conexion.ConexionBD.conexion;
+import java.awt.Color;
 import java.awt.Image;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ public class NModificar extends javax.swing.JDialog {
         parent.dispose();
         initComponents();
         visualizar();
+        getContentPane().setBackground(Color.white);
         ImageIcon volver = new ImageIcon("iconos/volver.png");
         ImageIcon volverDef = new ImageIcon(volver.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         btnVolver.setIcon(volverDef);
@@ -112,6 +114,9 @@ public class NModificar extends javax.swing.JDialog {
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        pnlPieza.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Nombre");
 
@@ -177,6 +182,8 @@ public class NModificar extends javax.swing.JDialog {
                     .addComponent(btnPModificar)))
         );
 
+        pnlTipos.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel4.setText("Nombre");
 
         txtPNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +242,8 @@ public class NModificar extends javax.swing.JDialog {
                     .addComponent(btnTIntro)
                     .addComponent(btnTModificar)))
         );
+
+        pnlModelo.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setText("Nombre");
 
@@ -320,6 +329,8 @@ public class NModificar extends javax.swing.JDialog {
                     .addComponent(btnMoModificar)))
         );
 
+        pnlMarca.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel9.setText("Nombre");
 
         jLabel10.setText("Pais");
@@ -382,6 +393,8 @@ public class NModificar extends javax.swing.JDialog {
                     .addComponent(btnMaModificar)))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,6 +419,7 @@ public class NModificar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setRollover(true);
 
         btnVolver.setFocusable(false);

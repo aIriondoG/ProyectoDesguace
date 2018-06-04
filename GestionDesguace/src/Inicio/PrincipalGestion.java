@@ -7,6 +7,7 @@ package Inicio;
 
 import Conexion.ConexionBD;
 import Registro.Registro;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -64,6 +65,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
         rellenarJC(valor);
         rellenarTabla(valor);
         rellenarBotones();
+        getContentPane().setBackground(Color.white);
 
     }
 
@@ -98,7 +100,9 @@ public class PrincipalGestion extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -189,6 +193,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         btnAñadir.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +237,8 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlRecambio.setBackground(new java.awt.Color(255, 255, 255));
 
         btnVender.setText("Vender");
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -279,6 +286,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setRollover(true);
 
         btnVolver.setFocusable(false);

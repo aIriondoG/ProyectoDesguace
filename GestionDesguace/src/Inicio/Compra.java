@@ -48,6 +48,7 @@ public class Compra extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         rellenarPC();
+        getContentPane().setVisible(true);
         lblCantidad.setVisible(false);
         jLabel4.setVisible(false);
 
@@ -95,7 +96,9 @@ public class Compra extends javax.swing.JDialog {
         btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Pieza"));
 
         jLabel1.setText("Pieza Seleccionada: ");
@@ -194,6 +197,7 @@ public class Compra extends javax.swing.JDialog {
             }
         });
 
+        jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar2.setRollover(true);
 
         btnVolver.setFocusable(false);

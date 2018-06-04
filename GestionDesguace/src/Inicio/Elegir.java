@@ -5,6 +5,7 @@
  */
 package Inicio;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ public class Elegir extends javax.swing.JDialog {
         padre = (JFrame) parent;
         initComponents();
         rellenoBotones();
+        getContentPane().setBackground(Color.white);
     }
 
     /**
@@ -43,6 +45,7 @@ public class Elegir extends javax.swing.JDialog {
         btn2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         btn1.setText("jButton1");
         btn1.addActionListener(new java.awt.event.ActionListener() {

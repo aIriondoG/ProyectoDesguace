@@ -81,7 +81,9 @@ public class NuevoUsuario extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Usuario"));
 
         jLabel1.setText("Usuario");
@@ -107,6 +109,8 @@ public class NuevoUsuario extends javax.swing.JDialog {
                 txtUsuarioActionPerformed(evt);
             }
         });
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

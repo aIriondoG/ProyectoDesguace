@@ -37,11 +37,12 @@ public class nRecambio extends javax.swing.JDialog {
         rellenoJC();
         padre = (JFrame) parent;
         if (pg.getAccion() == "Modificar") {
+            System.out.println("Modificar");
             rellenoJCM();
         }
         ImageIcon volver = new ImageIcon("iconos/volver.png");
         ImageIcon volverDef = new ImageIcon(volver.getImage().getScaledInstance(30, 20, Image.SCALE_DEFAULT));
-        btnVolver.setIcon(volverDef);
+ 
 
     }
 
@@ -54,6 +55,7 @@ public class nRecambio extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,10 +77,11 @@ public class nRecambio extends javax.swing.JDialog {
         btnAñadir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jToolBar1 = new javax.swing.JToolBar();
-        btnVolver = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Marca");
 
@@ -192,7 +195,7 @@ public class nRecambio extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAñadir.setText("Añadir Recambio");
@@ -239,18 +242,6 @@ public class nRecambio extends javax.swing.JDialog {
                 .addComponent(btnCancelar))
         );
 
-        jToolBar1.setRollover(true);
-
-        btnVolver.setFocusable(false);
-        btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVolver.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnVolver);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,16 +252,15 @@ public class nRecambio extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(234, 234, 234))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -320,7 +310,8 @@ public class nRecambio extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        this.setVisible(false);
+        padre.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaActionPerformed
@@ -401,26 +392,22 @@ public class nRecambio extends javax.swing.JDialog {
             cbMotor.removeAllItems();
             int numMotor = 0;
             int i = 0;
-            ResultSet rs = s.executeQuery("SELECT mo.Codigo "
+            String consulta = "SELECT mo.Codigo "
                     + "FROM modelo m , motor mo , modelomotor mm "
                     + "WHERE mo.P_Motor= mm.A_Motor "
                     + "AND mm.A_Modelo = m.P_Modelo "
-                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'");
+                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'";
+            ResultSet rs = s.executeQuery(consulta);
             while (rs.next()) {
                 numMotor++;
             }
             String[] motores = new String[numMotor];
-            ResultSet rs2 = s.executeQuery("SELECT mo.Codigo "
-                    + "FROM modelo m , motor mo , modelomotor mm "
-                    + "WHERE mo.P_Motor= mm.A_Motor "
-                    + "AND mm.A_Modelo = m.P_Modelo "
-                    + "AND m.Nombre ='" + cbModelo.getSelectedItem().toString() + "'");
+            ResultSet rs2 = s.executeQuery(consulta);
             while (rs2.next()) {
                 motores[i] = rs2.getString(1);
                 i++;
             }
             for (int j = 0; j < motores.length; j++) {
-                //System.out.println(marcas[j]);
                 cbMotor.addItem(motores[j]);
             }
 
@@ -433,22 +420,18 @@ public class nRecambio extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolverActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cbDesguace;
     private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
     private javax.swing.JComboBox<String> cbMotor;
     private javax.swing.JComboBox<String> cbPieza;
     private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -459,43 +442,46 @@ public class nRecambio extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
     public void rellenoJCM() {
         btnAñadir.setVisible(false);
         btnModificar.setVisible(true);
+        System.out.println("Botones cambiados");
         try {
             s = conexion.createStatement();
-
-            String relleno = "SELECT t.`Nombre` , p.Nombre , ma.`Nombre` , mo.`Nombre`, mot.`Codigo` , d.`Nombre`, r.`CantidadDisponible` ,r.`Precio`\n"
-                    + "FROM recambio r , marca ma , modelo mo , motor mot , modelomotor mm, desguace d , pieza p , tipo t\n"
-                    + "WHERE r.`A_Motor` = mot.`P_Motor`\n"
-                    + "AND r.`A_Pieza` = p.`P_Pieza`\n"
-                    + "AND r.`A_Desguace` = d.`P_Desguace`\n"
-                    + "AND mm.`A_Motor` = mot.`P_Motor`\n"
-                    + "AND mm.`A_Modelo` = mo.`P_Modelo`\n"
-                    + "AND mo.`A_Marca` = ma.`P_Marca`\n"
-                    + "AND p.`A_Tipo` = t.`P_Tipo`\n"
-                    + "AND r.`P_Recambio` =" + pg.getNombre();
+            System.out.println("Empezamos consulta");
+            String relleno = "SELECT t.`Nombre` , p.Nombre , ma.`Nombre` , mo.`Nombre`, mot.`Codigo` , d.`Nombre`, r.`CantidadDisponible` ,r.`Precio`\n" +
+"                    FROM recambio r , marca ma , modelo mo , motor mot , modelomotor mm, desguace d , pieza p , tipo t\n" +
+"                    WHERE r.`A_Motor` = mot.`P_Motor`\n" +
+"                    AND r.`A_Pieza` = p.`P_Pieza`\n" +
+"                    AND r.`A_Desguace` = d.`P_Desguace`\n" +
+"                    AND mm.`A_Motor` = mot.`P_Motor`\n" +
+"                    AND mm.`A_Modelo` = mo.`P_Modelo`\n" +
+"                    AND mo.`A_Marca` = ma.`P_Marca`\n" +
+"                    AND p.`A_Tipo` = t.`P_Tipo`\n" +
+"                    AND r.`P_Recambio` =" + pg.getNombre();
 
             ResultSet rs = s.executeQuery(relleno);
-            int o = 0;
+            
             while (rs.next()) {
+                //System.out.println(rs.getString(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+"-"+rs.getString(4)+"-"+rs.getString(5)+"-");
+            
                 cbTipo.setSelectedItem(rs.getString(1));
                 cbPieza.setSelectedItem(rs.getString(2));
-                cbMarca.setSelectedItem(rs.getString(3));
-                cbModelo.setSelectedItem(rs.getString(4));
+                //cbModelo.setSelectedItem(rs.getString(4));
+                //cbMarca.setSelectedItem(rs.getString(3));
                 cbMotor.setSelectedItem(rs.getString(5));
+                
                 //cbDesguace.setSelectedItem(rs.getString(6));
-                System.out.println("Cantiodad: " + rs.getInt(7));
+               /* System.out.println("Cantiodad: " + rs.getInt(7));
                 txtCantidad.setText(rs.getInt(7) + "");
                 System.out.println("Precio: " + rs.getInt(8));
-                txtPrecio.setText(rs.getDouble(8) + "");
-
+                txtPrecio.setText(rs.getDouble(8) + "");*/
+                System.out.println("BUCLE");
             }
-            System.out.println(o);
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(nRecambio.class.getName()).log(Level.SEVERE, null, ex);

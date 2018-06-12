@@ -61,7 +61,6 @@ public class Compra extends javax.swing.JDialog {
         ImageIcon volver = new ImageIcon("iconos/volver.png");
         ImageIcon volverDef = new ImageIcon(volver.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
-        btnVolver.setIcon(volverDef);
         btnComprar.setIcon(carritoDef);
         btnCancelar.setIcon(cancelarDef);
         priU = new PrincipalUsuario();
@@ -92,8 +91,6 @@ public class Compra extends javax.swing.JDialog {
         btnRyR = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jToolBar2 = new javax.swing.JToolBar();
-        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -140,7 +137,7 @@ public class Compra extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(lblCantidad)
-                                .addContainerGap(200, Short.MAX_VALUE))
+                                .addContainerGap())
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(txtCantidad))))
@@ -178,7 +175,7 @@ public class Compra extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -197,43 +194,23 @@ public class Compra extends javax.swing.JDialog {
             }
         });
 
-        jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
-        jToolBar2.setRollover(true);
-
-        btnVolver.setFocusable(false);
-        btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVolver.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(btnVolver);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jToolBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRyR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnComprar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelar))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnRyR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnComprar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,6 +241,7 @@ public class Compra extends javax.swing.JDialog {
             ResultSet rs = s.executeQuery("SELECT u.`P_Usuario`\n"
                     + "FROM usuario u\n"
                     + "WHERE u.`Usuario` = '" + r.getUsername() + "'");
+            
             while (rs.next()) {
                 idUsuario = rs.getInt(1);
             }
@@ -336,17 +314,6 @@ public class Compra extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnComprarActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
-        try {
-            this.dispose();
-            PiezaUsuario pu = new PiezaUsuario();
-            pu.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnVolverActionPerformed
-
     public void rellenarPC() throws SQLException {
         Statement s = conexion.createStatement();
         txtCoche.setText(priU.getCoche());
@@ -370,14 +337,12 @@ public class Compra extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnRyR;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JTextField txtCantidad;

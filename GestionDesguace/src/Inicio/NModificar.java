@@ -553,7 +553,7 @@ public class NModificar extends javax.swing.JDialog {
             s.executeUpdate(insertinto);
             this.dispose();
             pga = new PrincipalGestion();
-
+            pga.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(NModificar.class.getName()).log(Level.SEVERE, null, ex);
         }

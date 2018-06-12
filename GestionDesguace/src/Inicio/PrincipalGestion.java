@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -78,6 +79,7 @@ public class PrincipalGestion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel3 = new javax.swing.JPanel();
         lbl1 = new javax.swing.JLabel();
         cbMarca = new javax.swing.JComboBox<>();
@@ -88,22 +90,22 @@ public class PrincipalGestion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btnAñadir = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        btnAñadir = new javax.swing.JLabel();
+        btnModificar = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JLabel();
+        icono = new javax.swing.JLabel();
         pnlRecambio = new javax.swing.JPanel();
         btnVender = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         btnComprar = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
-        btnVolver = new javax.swing.JButton();
+        btnVolver = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl1.setText("Marca");
@@ -136,11 +138,11 @@ public class PrincipalGestion extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(lbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                     .addComponent(cbMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                     .addComponent(cbModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,24 +195,24 @@ public class PrincipalGestion extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        btnAñadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAñadirActionPerformed(evt);
+        btnAñadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAñadirMouseClicked(evt);
             }
         });
 
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
             }
         });
 
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
             }
         });
 
@@ -218,24 +220,31 @@ public class PrincipalGestion extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(icono, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(icono, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         pnlRecambio.setBackground(new java.awt.Color(255, 255, 255));
@@ -287,14 +296,12 @@ public class PrincipalGestion extends javax.swing.JFrame {
         );
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jToolBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jToolBar1.setRollover(true);
 
-        btnVolver.setFocusable(false);
-        btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVolver.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolverMouseClicked(evt);
             }
         });
         jToolBar1.add(btnVolver);
@@ -304,37 +311,29 @@ public class PrincipalGestion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlRecambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRecambio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(225, 225, 225))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlRecambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlRecambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -454,124 +453,9 @@ public class PrincipalGestion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        try {
-            setAccion("Añadir");
-            if (valor == "Pieza") {
-                setTipo(valor);
-                e = new Elegir(this, true);
-                e.setVisible(true);
-            }
-            if (valor == "Marca") {
-                setTipo(valor);
-                e = new Elegir(this, true);
-                e.setVisible(true);
-            }
-            if (valor == "Recambio") {
-                setTipo(valor);
-                nRecambio nr;
-                nr = new nRecambio(this, true);
-                nr.setVisible(true);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_btnAñadirActionPerformed
-
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
 
     }//GEN-LAST:event_tableMouseClicked
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        setAccion("Modificar");
-
-        int p = 0;
-
-        try {
-            Statement s = conexion.createStatement();
-            if (valor == "Pieza") {
-                setTipo("pieza");
-                int row = table.getSelectedRow();
-                Object end = modelo.getValueAt(row, 0);
-                setNombre(end.toString());
-                nm = new NModificar(this, "Modificar", true);
-                nm.setVisible(true);
-            }
-            if (valor == "Marca") {
-                setTipo("modelo");
-                int row = table.getSelectedRow();
-                Object end = modelo.getValueAt(row, 1);
-                Object salida = modelo.getValueAt(row, 2);
-                System.out.println(end.toString());
-                //setNombre(end.toString());
-                ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
-                        + "                    FROM modelo p "
-                        + "                    WHERE p.Nombre = '" + end.toString() + "'"
-                        + "                    AND p.AnoSalida = '" + salida.toString() + "'");
-                while (resultRell.next()) {
-                    p = resultRell.getInt(1);
-                }
-                setNombre(p + "");
-                nm = new NModificar(this, "Modificar", true);
-                nm.setVisible(true);
-            }
-            if (valor == "Recambio") {
-                setTipo(valor);
-                int row = table.getSelectedRow();
-                row = row + 1;
-                setNombre(row + "");
-                this.dispose();
-                nRecambio rec = new nRecambio(this, true);
-                rec.setVisible(true);
-
-            }
-
-            //e = new Elegir(this, true);
-        } catch (SQLException ex) {
-            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //e.setVisible(true);
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        System.out.println("\"Eliminar\"");
-        int row = table.getSelectedRow();
-
-        try {
-            Statement s = conexion.createStatement();
-            if (valor == "Recambio") {
-                System.out.println("Recambio");
-                row = row + 1;
-                s.executeUpdate("DELETE FROM recambio WHERE P_Recambio = " + row);
-            }
-            if (valor == "Marca") {
-                System.out.println("Marca");
-                int id = 0;
-                Object nombreMo = modelo.getValueAt(row, 1);
-                Object anoMo = modelo.getValueAt(row, 2);
-                System.out.println("Modelo: " + nombreMo.toString());
-                System.out.println("Salida: " + anoMo.toString());
-                ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
-                        + "                    FROM modelo p "
-                        + "                    WHERE p.Nombre = '" + nombreMo.toString() + "'"
-                        + "                    AND p.AnoSalida = '" + anoMo.toString() + "'");
-                while (resultRell.next()) {
-                    id = resultRell.getInt(1);
-                }
-                System.out.println("p:" + id);
-                s.executeUpdate("DELETE FROM modelo WHERE P_Modelo = " + id);
-            }
-            System.out.println("Intento");
-            this.dispose();
-            PrincipalGestion reload = new PrincipalGestion();
-            reload.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
         // TODO add your handling code here:
@@ -613,12 +497,137 @@ public class PrincipalGestion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnComprarActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        // TODO add your handling code here:
+        setAccion("Modificar");
+
+        int p = 0;
+
+        try {
+            Statement s = conexion.createStatement();
+            if (valor == "Pieza") {
+                setTipo("pieza");
+                int row = table.getSelectedRow();
+                Object end = modelo.getValueAt(row, 0);
+                setNombre(end.toString());
+                nm = new NModificar(this, "Modificar", true);
+                nm.setVisible(true);
+            }
+            if (valor == "Marca") {
+                setTipo("modelo");
+                int row = table.getSelectedRow();
+                Object end = modelo.getValueAt(row, 1);
+                Object salida = modelo.getValueAt(row, 2);
+                System.out.println(end.toString());
+                //setNombre(end.toString());
+                ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
+                        + "                    FROM modelo p "
+                        + "                    WHERE p.Nombre = '" + end.toString() + "'"
+                        + "                    AND p.AnoSalida = '" + salida.toString() + "'");
+                while (resultRell.next()) {
+                    p = resultRell.getInt(1);
+                }
+                setNombre(p + "");
+                nm = new NModificar(this, "Modificar", true);
+                nm.setVisible(true);
+            }
+            if (valor == "Recambio") {
+                setTipo(valor);
+                int row = table.getSelectedRow();
+                row = row + 1;
+                setNombre(row + "");
+                System.out.println(getNombre());
+                nRecambio rec = new nRecambio(this, true);
+                rec.setVisible(true);
+                this.dispose();
+                System.out.println("Hecho");
+            }
+            
+
+            //e = new Elegir(this, true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //e.setVisible(true);
+    }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+
+        // TODO add your handling code here:
+        System.out.println("\"Eliminar\"");
+        int row = table.getSelectedRow();
+
+        try {
+            Statement s = conexion.createStatement();
+            if (valor == "Recambio") {
+                System.out.println("Recambio");
+                row = row + 1;
+                s.executeUpdate("DELETE FROM recambio WHERE P_Recambio = " + row);
+            }
+            if (valor == "Marca") {
+                System.out.println("Marca");
+                int id = 0;
+                System.out.println(row);
+                if (row == -1) {
+                    JOptionPane.showMessageDialog(this, "Selecciona un modelo para borrarlo");
+                } else {
+                    Object nombreMo = modelo.getValueAt(row, 1);
+                    Object anoMo = modelo.getValueAt(row, 2);
+                    System.out.println("Modelo: " + nombreMo.toString());
+                    System.out.println("Salida: " + anoMo.toString());
+                    ResultSet resultRell = s.executeQuery("SELECT p.P_Modelo "
+                            + "                    FROM modelo p "
+                            + "                    WHERE p.Nombre = '" + nombreMo.toString() + "'"
+                            + "                    AND p.AnoSalida = '" + anoMo.toString() + "'");
+                    while (resultRell.next()) {
+                        id = resultRell.getInt(1);
+                    }
+                    System.out.println("p:" + id);
+                    s.executeUpdate("DELETE FROM modelo WHERE P_Modelo = " + id);
+                }
+            }
+            System.out.println("Intento");
+            this.dispose();
+            PrincipalGestion reload = new PrincipalGestion();
+            reload.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
         // TODO add your handling code here:
         this.dispose();
         Registro r = new Registro();
         r.setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_btnVolverMouseClicked
+
+    private void btnAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAñadirMouseClicked
+        // TODO add your handling code here:
+        try {
+            setAccion("Añadir");
+            if (valor == "Pieza") {
+                setTipo(valor);
+                e = new Elegir(this, true);
+                e.setVisible(true);
+            }
+            if (valor == "Marca") {
+                setTipo(valor);
+                e = new Elegir(this, true);
+                e.setVisible(true);
+            }
+            if (valor == "Recambio") {
+                setTipo(valor);
+                nRecambio nr;
+                nr = new nRecambio(this, true);
+                nr.setVisible(true);
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PrincipalGestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAñadirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -660,19 +669,21 @@ public class PrincipalGestion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAñadir;
+    private javax.swing.JLabel btnAñadir;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnComprar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel btnEliminar;
+    private javax.swing.JLabel btnModificar;
     private javax.swing.JButton btnVender;
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel btnVolver;
     private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
+    private javax.swing.JLabel icono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbl1;
@@ -855,8 +866,8 @@ public class PrincipalGestion extends javax.swing.JFrame {
     }
 
     public void rellenarBotones() {
-        int alturaIcon = 30;
-        int anchuraIcon = 30;
+        int alturaIcon = 50;
+        int anchuraIcon = 50;
         ImageIcon añadir = new ImageIcon("iconos/añadir.png");
         ImageIcon añadirDef = new ImageIcon(añadir.getImage().getScaledInstance(anchuraIcon, alturaIcon, Image.SCALE_DEFAULT));
 
@@ -867,19 +878,23 @@ public class PrincipalGestion extends javax.swing.JFrame {
         ImageIcon eliminarDef = new ImageIcon(eliminar.getImage().getScaledInstance(anchuraIcon, alturaIcon, Image.SCALE_DEFAULT));
 
         ImageIcon buscar = new ImageIcon("iconos/buscar.png");
-        ImageIcon buscarDef = new ImageIcon(buscar.getImage().getScaledInstance(anchuraIcon, alturaIcon, Image.SCALE_DEFAULT));
+        ImageIcon buscarDef = new ImageIcon(buscar.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 
         ImageIcon volver = new ImageIcon("iconos/logout.png");
         ImageIcon volverDef = new ImageIcon(volver.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
+        ImageIcon icon = new ImageIcon("iconos/reparacion.png");
+        ImageIcon iconDef = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+
         Image rIcon = Toolkit.getDefaultToolkit().getImage("iconos/reparacion.png");
         this.setIconImage(rIcon);
-        
+
         btnAñadir.setIcon(añadirDef);
         btnModificar.setIcon(modificarDef);
         btnEliminar.setIcon(eliminarDef);
         btnBuscar.setIcon(buscarDef);
         btnVolver.setIcon(volverDef);
+        icono.setIcon(iconDef);
     }
 
 }

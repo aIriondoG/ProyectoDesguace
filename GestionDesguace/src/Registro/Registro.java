@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -233,6 +234,8 @@ public class Registro extends javax.swing.JFrame {
             if (verdadero2 == true) {
                 setUsuario(txtUsuario.getText());
                 entrar();
+            }else{
+                JOptionPane.showMessageDialog(this, "Usuario Incorrecto");
             }
 
         } catch (SQLException ex) {

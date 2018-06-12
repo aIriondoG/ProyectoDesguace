@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4ecd400-6c78-4d42-b922-9e4b2310a499">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="65"/>
 	<parameter name="factura" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -52,15 +52,16 @@ WHERE factura.`P_Factura` = $P{factura}]]>
 	<field name="factura_Fecha" class="java.lang.String"/>
 	<field name="recambio_P_Recambio" class="java.lang.Integer"/>
 	<variable name="iva" class="java.lang.Double">
-		<variableExpression><![CDATA[$V{recambio_Precio_1}*21/100]]></variableExpression>
+		<variableExpression><![CDATA[$V{importeUnitario}
+]]></variableExpression>
 	</variable>
-	<variable name="recambio_Precio_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+	<variable name="recambio_Precio_1" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{recambio_Precio}*$F{car_re_Cantidad}]]></variableExpression>
 	</variable>
-	<variable name="importe" class="java.lang.Float">
+	<variable name="importe" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{recambio_Precio_1}-$V{iva}]]></variableExpression>
 	</variable>
-	<variable name="importeUnitario" class="java.lang.String">
+	<variable name="importeUnitario" class="java.lang.Double">
 		<variableExpression><![CDATA[$F{car_re_Cantidad}*$F{recambio_Precio}]]></variableExpression>
 	</variable>
 	<pageHeader>
@@ -103,8 +104,8 @@ WHERE factura.`P_Factura` = $P{factura}]]>
 				<textFieldExpression><![CDATA[$F{usuario_CorreoElectronico}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="0" y="0" width="209" height="84" uuid="338ca81c-e30f-4a1c-b7bd-b58a1c9337c0"/>
-				<imageExpression><![CDATA[".\\"+$F{desguace_Nombre}+".jpg"]]></imageExpression>
+				<reportElement x="0" y="0" width="199" height="84" uuid="338ca81c-e30f-4a1c-b7bd-b58a1c9337c0"/>
+				<imageExpression><![CDATA[".\\reparacion.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="411" y="33" width="43" height="12" uuid="14295d60-fd95-49f3-b017-e6e315434d43"/>
@@ -240,12 +241,12 @@ WHERE factura.`P_Factura` = $P{factura}]]>
 				<textFieldExpression><![CDATA[$V{recambio_Precio_1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="507" y="1" width="48" height="20" uuid="e4894c02-f5d6-4aa3-9d9a-914c9023c832"/>
-				<textFieldExpression><![CDATA[$V{importe}]]></textFieldExpression>
+				<reportElement x="507" y="21" width="48" height="20" uuid="aa26db34-8afa-456b-baa2-fb0d01138136"/>
+				<textFieldExpression><![CDATA[$V{recambio_Precio_1}*21/100]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="507" y="21" width="48" height="20" uuid="535af2ea-59b0-4042-8214-039bba970174"/>
-				<textFieldExpression><![CDATA[$V{iva}]]></textFieldExpression>
+				<reportElement x="507" y="1" width="48" height="20" uuid="288492c3-9d2e-4b0d-9583-219b4053e2ef"/>
+				<textFieldExpression><![CDATA[$V{recambio_Precio_1}-$V{recambio_Precio_1}*21/100]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

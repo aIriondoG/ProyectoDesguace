@@ -311,7 +311,8 @@ public class Compra extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        this.setVisible(false);
+        piU.setVisible(true);
     }//GEN-LAST:event_btnComprarActionPerformed
 
     public void rellenarPC() throws SQLException {
